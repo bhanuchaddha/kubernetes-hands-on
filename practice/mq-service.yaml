@@ -1,0 +1,19 @@
+kind: Service
+apiVersion: v1
+metadata:
+  # Unique key of the Service instance
+  name: mq-service
+spec:
+  ports:
+    # Accept traffic sent to port 8161
+    - name: http
+      nodePort: 30002 
+      port: 8161
+  selector:
+    # Loadbalance traffic across Pods matching
+    # this label selector
+    app: mq
+  # Create an HA proxy in the cloud provider
+  # with an External IP address - *Only supported
+  # by some cloud providers*
+  type: NodePort
